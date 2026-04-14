@@ -23,7 +23,7 @@ if ($conn->connect_error == null) {
     $compResult = $conn->query("SELECT company_id, company_name FROM Insurance_Company");
     if ($compResult && $compResult->num_rows > 0) {
         while($row = $compResult->fetch_assoc()) {
-            $companyOptions[] = ["id" => $row["company_id"], "company_name" => $row["company_name"]];
+            $companyOptions[] = ["id" => $row["company_id"], "name" => $row["company_name"]];
         }
     }
 }
