@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Sales Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .menu-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn {
+            display: block;
+            padding: 15px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+        .btn-admin {
+            background-color: #3498db;
+        }
+        .btn-admin:hover {
+            background-color: #2980b9;
+        }
+        .btn-friend {
+            background-color: #2ecc71;
+        }
+        .btn-friend:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <h1>System Portal</h1>
+        <p>Welcome to the management system. Please select your destination.</p>
+
+        <div class="nav-buttons">
+            <a href="server.php" class="btn btn-admin">Go to View Viewer</a>
+
+            <a href="stored_procedure.php" class="btn btn-friend">Go to Stored Procedures</a>
+        </div>
+    </div>
+
+</body>
+</html>
