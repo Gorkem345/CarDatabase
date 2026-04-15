@@ -4,7 +4,7 @@ $host = "data-management-server-4.cbxlqxkadwhn.us-east-1.rds.amazonaws.com";
 $user = "GorkemAkdogan";
 $pass = "569f1097a98fdaa500d9da399631fd7f9ef8c4d6";
 $db   = "group04db";
-\\test
+
 
 $conn = new mysqli($host, $user, $pass, $db);
 
