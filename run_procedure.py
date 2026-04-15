@@ -11,7 +11,6 @@ db_config = {
 if __name__ == "__main__":
     procedure_name = sys.argv[1]
     params = sys.argv[2:]
-
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
