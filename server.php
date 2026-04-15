@@ -69,7 +69,7 @@
             $view = escapeshellarg($_POST['view_name']);
             echo "<h2>Viewing: " . htmlspecialchars($_POST['view_name']) . "</h2>";
 
-            $pythonExecutable = '"C:\Users\Gorkem\AppData\Local\Programs\Python\Python314\python.exe"';
+            $pythonExecutable = '"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3"';
             $command = $pythonExecutable . " process.py " . $view;
 
             $output = shell_exec($command . " 2>&1");

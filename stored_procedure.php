@@ -11,18 +11,16 @@ $carOptions = [];
 $companyOptions = [];
 
 if ($conn->connect_error == null) {
-    // Fetch Cars (Change 'model' if your column is named something else)
     $carResult = $conn->query("SELECT car_id, model FROM Car");
     if ($carResult && $carResult->num_rows > 0) {
-        while($row = $carResult->fetch_assoc()) {
+        while ($row = $carResult->fetch_assoc()) {
             $carOptions[] = ["id" => $row["car_id"], "name" => $row["model"]];
         }
     }
 
-    // Fetch Companies (Change 'name' if your column is named something else)
     $compResult = $conn->query("SELECT company_id, company_name FROM Insurance_Company");
     if ($compResult && $compResult->num_rows > 0) {
-        while($row = $compResult->fetch_assoc()) {
+        while ($row = $compResult->fetch_assoc()) {
             $companyOptions[] = ["id" => $row["company_id"], "name" => $row["company_name"]];
         }
     }
@@ -37,17 +35,69 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Run Stored Procedures</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
-        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
-        h2 { color: #2c3e50; margin-top: 0; }
-        .form-group { margin-bottom: 15px; }
-        label { display: inline-block; width: 150px; font-weight: bold; color: #34495e; }
-        input[type="text"], select { padding: 8px; width: calc(100% - 170px); border: 1px solid #ccc; border-radius: 4px; }
-        .btn { background-color: #2ecc71; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; margin-top: 20px; width: 100%;}
-        .btn:hover { background-color: #27ae60; }
-        .back-link { display: block; margin-top: 20px; text-align: center; color: #3498db; text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }
-        .result-box { margin-top: 20px; background-color: #eee; padding: 15px; border-radius: 4px; border-left: 5px solid #3498db; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            padding: 40px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            width: calc(100% - 170px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #27ae60;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .result-box {
+            margin-top: 20px;
+            background-color: #eee;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 5px solid #3498db;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +114,7 @@ $conn->close();
                 <option value="RecoverRent">RecoverRent</option>
                 <option value="RentCar">RentCar</option>
                 <option value="Renew_Insurance">Renew_Insurance</option>
+                <option value="SeasonalPriceUpdate">SeasonalPriceUpdate (Python)</option>
             </select>
         </div>
 
@@ -77,12 +128,16 @@ $conn->close();
         $proc = $_POST['procedure_name'];
         $params = isset($_POST['params']) ? $_POST['params'] : [];
 
-        $pythonExecutable = '"C:\Users\Gorkem\AppData\Local\Programs\Python\Python314\python.exe"';
+        $pythonExecutable = '"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3"';
 
-        $command = $pythonExecutable . " run_procedure.py " . escapeshellarg($proc);
+        if ($proc === "SeasonalPriceUpdate") {
+            $command = $pythonExecutable . " test.py";
+        } else {
+            $command = $pythonExecutable . " run_procedure.py " . escapeshellarg($proc);
 
-        foreach ($params as $p) {
-            $command .= " " . escapeshellarg($p);
+            foreach ($params as $p) {
+                $command .= " " . escapeshellarg($p);
+            }
         }
 
         $output = shell_exec($command . " 2>&1");
@@ -101,7 +156,8 @@ $conn->close();
         "DoMaintenance": ["carID", "cost", "location"],
         "RecoverRent": [],
         "RentCar": ["car_id", "customer_id", "employee_id", "days", "payment_method"],
-        "Renew_Insurance": ["company_id", "car_id", "price"]
+        "Renew_Insurance": ["company_id", "car_id", "price"],
+        "SeasonalPriceUpdate": []
     };
 
     const availableLocations = [
@@ -119,7 +175,6 @@ $conn->close();
         "Cash", "Credit Card", "Debit Card", "Bank Transfer"
     ];
 
-    // INJECTING LIVE DATABASE DATA INTO JAVASCRIPT
     const availableCars = <?php echo json_encode($carOptions); ?>;
     const availableCompanies = <?php echo json_encode($companyOptions); ?>;
 
@@ -194,7 +249,6 @@ $conn->close();
                     defaultOption.innerText = "-- Select a Car --";
                     inputElement.appendChild(defaultOption);
 
-                    // Now using real DB data!
                     availableCars.forEach(car => {
                         const opt = document.createElement("option");
                         opt.value = car.id;
@@ -212,7 +266,6 @@ $conn->close();
                     defaultOption.innerText = "-- Select a Company --";
                     inputElement.appendChild(defaultOption);
 
-                    // Now using real DB data!
                     availableCompanies.forEach(comp => {
                         const opt = document.createElement("option");
                         opt.value = comp.id;
