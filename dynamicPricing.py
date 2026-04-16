@@ -17,13 +17,13 @@ if month in [12, 1, 2]:
     multiplier = 1.30
 elif month in [3, 4, 5]:
     season = "Spring"
-    multiplier = 1.10
+    multiplier = 0.9
 elif month in [6, 7, 8]:
     season = "Summer"
-    multiplier = 1.25
+    multiplier = 0.85
 else:
     season = "Autumn"
-    multiplier = 1.00
+    multiplier = 1.10
 
 print(f"Current season: {season}")
 print(f"Multiplier: {multiplier}")
