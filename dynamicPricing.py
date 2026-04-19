@@ -14,16 +14,16 @@ month = datetime.now().month
 
 if month in [12, 1, 2]:
     season = "Winter"
-    multiplier = 1.30
+    multiplier = 0.8
 elif month in [3, 4, 5]:
     season = "Spring"
     multiplier = 0.9
 elif month in [6, 7, 8]:
     season = "Summer"
-    multiplier = 0.85
+    multiplier = 1.35
 else:
     season = "Autumn"
-    multiplier = 1.10
+    multiplier = 1.30
 
 print(f"Current season: {season}")
 print(f"Multiplier: {multiplier}")
