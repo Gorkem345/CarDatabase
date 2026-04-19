@@ -70,7 +70,7 @@
             echo "<h2>Viewing: " . htmlspecialchars($_POST['view_name']) . "</h2>";
 
             $pythonExecutable = '"C:\Users\Gorkem\AppData\Local\Programs\Python\Python312\python.exe"';
-            $command = $pythonExecutable . " process.py " . $view;
+            $command = $pythonExecutable . " get_views.py " . $view;
 
             $output = shell_exec($command . " 2>&1");
 
