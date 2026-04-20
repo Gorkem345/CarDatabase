@@ -182,6 +182,6 @@ This project is open-source and available under the MIT License.
 
 ## 👨‍💻 Author
 
-Developed by **Görkem and Gökdeniz**
+Developed by **Görkem Akdoğan, Gökdeniz İnan, Despoina Chatzopoulou**
 
 ---
