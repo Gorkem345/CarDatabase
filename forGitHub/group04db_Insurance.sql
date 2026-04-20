@@ -1,0 +1,68 @@
+-- MySQL dump 10.13  Distrib 8.0.45, for macos15 (arm64)
+--
+-- Host: data-management-server-4.cbxlqxkadwhn.us-east-1.rds.amazonaws.com    Database: group04db
+-- ------------------------------------------------------
+-- Server version	8.4.7
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
+
+--
+-- Table structure for table `Insurance`
+--
+
+DROP TABLE IF EXISTS `Insurance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Insurance` (
+  `insurance_id` int NOT NULL AUTO_INCREMENT,
+  `Insurance_Company_company_id` int NOT NULL,
+  `Car_car_id` int NOT NULL,
+  `begin_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `insurance_price` int DEFAULT NULL,
+  PRIMARY KEY (`insurance_id`),
+  KEY `fk_Insurance_Insurance_Company1_idx` (`Insurance_Company_company_id`),
+  KEY `fk_Insurance_Car1_idx` (`Car_car_id`),
+  CONSTRAINT `fk_Insurance_Car1` FOREIGN KEY (`Car_car_id`) REFERENCES `Car` (`car_id`),
+  CONSTRAINT `fk_Insurance_Insurance_Company1` FOREIGN KEY (`Insurance_Company_company_id`) REFERENCES `Insurance_Company` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Insurance`
+--
+
+LOCK TABLES `Insurance` WRITE;
+/*!40000 ALTER TABLE `Insurance` DISABLE KEYS */;
+INSERT INTO `Insurance` VALUES (1,1,1,'2025-01-10','2026-01-10',6000),(2,2,2,'2025-02-15','2026-02-15',5200),(3,3,3,'2025-03-20','2026-03-20',6100),(4,4,4,'2025-04-05','2026-04-05',6000),(5,5,5,'2025-05-12','2026-05-12',4000),(6,1,6,'2025-01-10','2026-01-10',4500),(7,2,7,'2025-02-15','2026-02-15',5200),(8,3,8,'2025-03-20','2026-03-20',6100),(9,4,9,'2025-04-05','2026-04-05',6000),(10,5,10,'2025-05-12','2026-05-12',4000),(11,1,11,'2025-01-10','2026-01-10',4500),(12,2,12,'2025-02-15','2026-02-15',5200),(13,3,13,'2025-03-20','2026-03-20',6100),(14,4,14,'2025-04-05','2026-04-05',6000),(15,5,15,'2025-05-12','2026-05-12',4000),(16,1,16,'2025-01-10','2026-01-10',4500),(17,2,17,'2025-02-15','2026-02-15',5200),(18,3,18,'2025-03-20','2026-03-20',6100),(19,4,19,'2025-04-05','2026-04-05',6000),(20,5,20,'2025-05-12','2026-05-12',6150),(21,1,21,'2025-01-10','2026-01-10',6500),(22,2,22,'2025-02-15','2026-02-15',8801),(23,3,24,'2025-03-20','2026-03-20',4500),(24,4,25,'2025-04-05','2026-04-05',9500),(25,5,26,'2025-05-12','2026-05-12',6150),(26,1,27,'2025-01-10','2026-01-10',6500),(27,2,28,'2025-02-15','2026-02-15',8801),(28,3,29,'2025-03-20','2026-03-20',4500),(29,4,30,'2025-04-05','2026-04-05',9500),(30,5,31,'2025-05-12','2026-05-12',6150),(31,1,32,'2025-01-10','2026-01-10',6500),(32,4,1,'2026-04-14','2027-04-14',5000);
+/*!40000 ALTER TABLE `Insurance` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-04-20 11:47:29
